@@ -37,6 +37,7 @@ public final class GetFollowersIDs {
             Twitter twitter = new TwitterFactory().getInstance();
             long cursor = -1;
             IDs ids;
+            int followersNum =0;
             System.out.println("Listing followers's ids.");
             do {
                 if (0 < args.length) {
@@ -46,8 +47,10 @@ public final class GetFollowersIDs {
                 }
                 for (long id : ids.getIDs()) {
                     System.out.println(id);
+                    followersNum++;
                 }
             } while ((cursor = ids.getNextCursor()) != 0);
+            System.out.println("Number of Followers : " + followersNum);
             System.exit(0);
         } catch (TwitterException te) {
             te.printStackTrace();

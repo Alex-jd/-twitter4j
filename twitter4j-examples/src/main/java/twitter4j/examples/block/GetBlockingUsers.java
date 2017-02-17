@@ -41,8 +41,10 @@ public final class GetBlockingUsers {
             List<User> users;
             do {
                 users = twitter.getBlocksList(page);
+                //System.out.println(users);
                 for (User user : users) {
                     System.out.println("@" + user.getScreenName());
+                	//System.out.println("@" + user.getName());
                 }
                 page++;
                 // this code ends up in an infinite loop due to the issue 1988
