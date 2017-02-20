@@ -47,6 +47,7 @@ public final class GetFriendsIDs {
                 }
                 for (long id : ids.getIDs()) {
                     System.out.println(id);
+                    //Sysstem.out.println(twitter.getScreenName() );
                     friendsNum++;
                 }
             } while ((cursor = ids.getNextCursor()) != 0);
