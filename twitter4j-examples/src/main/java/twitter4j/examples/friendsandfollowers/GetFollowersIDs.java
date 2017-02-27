@@ -41,7 +41,8 @@ public final class GetFollowersIDs {
             System.out.println("Listing followers's ids.");
             do {
                 if (0 < args.length) {
-                    ids = twitter.getFollowersIDs(args[0], cursor);
+                    //ids = twitter.getFollowersIDs(args[0], cursor);
+                    ids = twitter.getFollowersIDs(368379261L, cursor,10);
                 } else {
                     ids = twitter.getFollowersIDs(cursor);
                 }

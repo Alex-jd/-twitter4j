@@ -20,6 +20,7 @@ import twitter4j.IDs;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 
 /**
  * Lists friends' ids
@@ -41,13 +42,16 @@ public final class GetFriendsIDs {
             System.out.println("Listing following ids.");
             do {
                 if (0 < args.length) {
-                    ids = twitter.getFriendsIDs(args[0], cursor);
+                    //ids = twitter.getFriendsIDs(args[0], cursor);
+                    ids = twitter.getFriendsIDs(2855222238L);
                 } else {
                     ids = twitter.getFriendsIDs(cursor);
                 }
                 for (long id : ids.getIDs()) {
                     System.out.println(id);
                     //Sysstem.out.println(twitter.getScreenName() );
+                    User user = twitter.showUser(id);
+                    System.out.println(user.getName());
                     friendsNum++;
                 }
             } while ((cursor = ids.getNextCursor()) != 0);
