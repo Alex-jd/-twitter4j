@@ -16,7 +16,8 @@ public class ListOfFriendOfMyFriends {
 			long cursor=-1;
 			if(!u.isProtected()) {
 			do {	
-				idfoll = tw.getFollowersIDs(user, cursor, 15);
+				//idfoll = tw.getFollowersIDs(user, cursor, 5);
+				idfoll = tw.getFollowersIDs(user, cursor);
 				System.out.println("Yes, I'm here");
 				for (Long edge : idfoll.getIDs())	{
 					System.out.println("IDs " + edge);
