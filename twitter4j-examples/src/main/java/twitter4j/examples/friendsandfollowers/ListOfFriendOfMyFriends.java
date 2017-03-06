@@ -20,7 +20,7 @@ public class ListOfFriendOfMyFriends {
 				idfoll = tw.getFollowersIDs(user, cursor);
 				System.out.println("Yes, I'm here");
 				for (Long edge : idfoll.getIDs())	{
-					System.out.println("IDs " + edge);
+					//System.out.println("IDs " + edge);
 					result.addFollower(edge);
 					}	
 				cursor = idfoll.getNextCursor();
