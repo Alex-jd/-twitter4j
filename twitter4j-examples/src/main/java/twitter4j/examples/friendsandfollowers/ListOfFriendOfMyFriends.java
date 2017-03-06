@@ -2,6 +2,7 @@ package twitter4j.examples.friendsandfollowers;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import twitter4j.*;
 
@@ -18,6 +19,8 @@ public class ListOfFriendOfMyFriends {
 			do {	
 				//idfoll = tw.getFollowersIDs(user, cursor, 5);
 				idfoll = tw.getFollowersIDs(user, cursor);
+				List<User> users=tw.getFriendsList(user, cursor);
+				System.out.println(users);
 				System.out.println("Yes, I'm here");
 				for (Long edge : idfoll.getIDs())	{
 					//System.out.println("IDs " + edge);
@@ -58,8 +61,8 @@ public class ListOfFriendOfMyFriends {
 			return clone;
 		}*/
 		
-		public void addFollower(Long tw)	{
-			this.followers.addLast(tw);
+		public void addFollower(Long edge)	{
+			this.followers.addLast(edge);
 		}
 		
 		public LinkedList<Long> getFollowers() {

@@ -21,7 +21,7 @@ public class PostgreSQLJDBC {
          Class.forName("org.postgresql.Driver");
          c = DriverManager
             .getConnection("jdbc:postgresql://10.98.137.19:5432/capstone",
-            "alex_jd", "1234");
+            "alex_jd", "Nheg{jvzrf");
          
          c.setAutoCommit(false);
          System.out.println("Opened database successfully");
@@ -34,10 +34,10 @@ public class PostgreSQLJDBC {
          /*String sql = "insert into \"UserGraph\".\"testTable\" values ('user1', 1234,'{15,389}','{45812,14534}');";
          stmt.executeUpdate(sql);*/
 
-         String sql = "UPDATE \"UserGraph\".\"testTable\" set \"followersIDs\"[5:8] = \'{10220,652,4522,22}\'WHERE \"userID\" = 123;";
+         /*String sql = "UPDATE \"UserGraph\".\"testTable\" set \"followersIDs\"[5:8] = \'{10220,652,4522,22}\'WHERE \"userID\" = 123;";
          stmt.executeUpdate(sql);
          //System.out.println("Yes, I'm here");
-         c.commit();
+         c.commit();*/
 
 
          ResultSet rs = stmt.executeQuery( "SELECT * FROM \"UserGraph\".\"testTable\" where \"userID\" = 123;" );
@@ -47,7 +47,7 @@ public class PostgreSQLJDBC {
             java.sql.Array followersIDs  = rs.getArray(3);
             System.out.println(followersIDs);
             Object[] str_followersIDs = (Object[]) followersIDs.getArray();
-            System.out.println(str_followersIDs);
+            //System.out.println(str_followersIDs);
             //Set<Long> followersSet = new HashSet<Long>();
             Set<Long> followersSet = new TreeSet<Long>();
             for (int i=0; i<str_followersIDs.length; i++) {

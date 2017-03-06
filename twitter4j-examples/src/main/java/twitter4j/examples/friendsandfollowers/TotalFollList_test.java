@@ -8,7 +8,7 @@ public class TotalFollList_test {
 		// TODO Auto-generated method stub
 		
 		ListOfFriendOfMyFriends list = new ListOfFriendOfMyFriends();
-		LinkedList<Long> userList = list.getTotalFollowers(368379261L);
+		LinkedList<Long> userList = list.getTotalFollowers(454099919L);
 		int numberOfUsers = 0;
 		
 		for (Long userId : userList ) {
