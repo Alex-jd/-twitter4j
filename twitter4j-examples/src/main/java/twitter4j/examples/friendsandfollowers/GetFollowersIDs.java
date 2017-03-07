@@ -42,9 +42,9 @@ public final class GetFollowersIDs {
             do {
                 if (0 < args.length) {
                     //ids = twitter.getFollowersIDs(args[0], cursor);
-                    ids = twitter.getFollowersIDs(368379261L, cursor,10);
+                    ids = twitter.getFriendsIDs(368379261L, cursor,10);
                 } else {
-                    ids = twitter.getFollowersIDs(cursor);
+                    ids = twitter.getFriendsIDs(cursor);
                 }
                 for (long id : ids.getIDs()) {
                     System.out.println(id);

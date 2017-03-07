@@ -1,35 +1,38 @@
 package twitter4j.examples.friendsandfollowers;
 
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 
 import twitter4j.*;
 
 public class ListOfFriendOfMyFriends {
 	
-	public LinkedList<Long> getTotalFollowers(long user) {
+	public HashMap<String,LinkedList<Long>> getTotalFollowers(long user) {
 		try {
 			IDs idfoll;
 			Twitter tw = new TwitterFactory().getInstance();
-			TotalFollowersList result= new TotalFollowersList();
 			User u = tw.showUser(user);//TODO trova il modo di elminare questa richiesta
+			TotalFollowersList result= new TotalFollowersList(u.getName());
+			//System.out.println("user " + u.getName()); 
 			long cursor=-1;
 			if(!u.isProtected()) {
-			do {	
-				//idfoll = tw.getFollowersIDs(user, cursor, 5);
-				idfoll = tw.getFollowersIDs(user, cursor);
-				List<User> users=tw.getFriendsList(user, cursor);
-				System.out.println(users);
-				System.out.println("Yes, I'm here");
-				for (Long edge : idfoll.getIDs())	{
-					//System.out.println("IDs " + edge);
-					result.addFollower(edge);
+				do {	
+					//idfoll = tw.getFollowersIDs(user);
+					idfoll = tw.getFollowersIDs(user, cursor);
+					System.out.println("Yes, I'm here");
+					//System.out.println("Wait... 60sec");
+					TimeUnit.SECONDS.sleep(1); 
+					for (Long edge : idfoll.getIDs())	{
+						//System.out.println("IDs " + edge);
+						result.addFollower(edge);
 					}	
-				cursor = idfoll.getNextCursor();
-				}
-			while(idfoll.hasNext());
-			return result.getFollowers();
+					cursor = idfoll.getNextCursor();
+					System.out.println("cursros " + cursor);
+					}
+				while(idfoll.hasNext());
+				return result.getFollowers();
 			}	
 			else System.out.println(user+" è protetto.");
 			return null;
@@ -39,19 +42,28 @@ public class ListOfFriendOfMyFriends {
 				e.printStackTrace();
 				return null;
 			}
+		catch (InterruptedException ie) {
+			return null;
+		}
 	}
 	public class TotalFollowersList {
 		private LinkedList<Long> followers;
+		private LinkedList<Long> friends;
+		private HashMap<String,LinkedList<Long>> follAndFriends;
+		private String userName = "";
 		//public Iterator it;
 		
-		public TotalFollowersList(LinkedList<Long> followers) {
-			super();
+		/*public TotalFollowersList(String userName) {
+			//super();
 			this.followers = followers;
-		}
+		}*/
 		
-		public TotalFollowersList() {
-			super();
-			this.followers= new LinkedList<Long>();
+		public TotalFollowersList(String userName) {
+			//super();
+			this.userName = userName;
+			this.followers = new LinkedList<Long>();
+			this.friends = new LinkedList<Long>();
+			this.follAndFriends = new HashMap<String,LinkedList<Long>>();
 		}	
 		
 		/*public static followersList clone(followersList list) {	
@@ -65,8 +77,14 @@ public class ListOfFriendOfMyFriends {
 			this.followers.addLast(edge);
 		}
 		
-		public LinkedList<Long> getFollowers() {
-			return followers;
+		public void addFriend(Long edge)	{
+			this.friends.addLast(edge);
+		}
+		
+		public HashMap<String,LinkedList<Long>> getFollowers() {
+			follAndFriends.put(userName + "_fl", followers);
+			follAndFriends.put(userName + "_fr", friends);
+			return follAndFriends;
 		}
 	}
 	
