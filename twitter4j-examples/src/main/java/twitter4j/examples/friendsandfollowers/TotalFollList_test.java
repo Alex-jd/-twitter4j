@@ -19,8 +19,8 @@ public class TotalFollList_test {
 		ListOfFriendOfMyFriends list = new ListOfFriendOfMyFriends();
 		HashMap<String,LinkedList<Long>>userList = list.getTotalFollowers(userID);
 		int numberOfUsers = 0;
-		for (Long userId : userList.keySet() ) {
-			System.out.println("userIds " + userId);
+		for (String userNameKey : userList.keySet() ) {
+			System.out.println("userIds " + userNameKey);
 			numberOfUsers++;
 		}
 		System.out.println("TotalUsers " + numberOfUsers);
