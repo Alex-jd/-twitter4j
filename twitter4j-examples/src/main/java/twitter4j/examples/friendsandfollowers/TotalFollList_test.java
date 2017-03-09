@@ -21,7 +21,7 @@ public class TotalFollList_test {
 		Statement stmt = null;
 		try {
 			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://10.98.137.19:5432/capstone", "alex_jd", "Nheg{jvzrf");
+			c = DriverManager.getConnection("jdbc:postgresql://10.98.137.19:5432/capstone", "alex_jd", "123");
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 			stmt = c.createStatement();
