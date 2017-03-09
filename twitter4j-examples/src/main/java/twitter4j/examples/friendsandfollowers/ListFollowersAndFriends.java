@@ -9,7 +9,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.User;
 
-public class ListFollowersAndFriends extends getGraph {
+public class ListFollowersAndFriends extends GetGraph {
 
 	public ListFollowersAndFriends(Long userID) {
 		this.userID = userID;

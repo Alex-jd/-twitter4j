@@ -40,11 +40,11 @@ public class PostgreSQLJDBC {
          c.commit();*/
 
 
-         ResultSet rs = stmt.executeQuery( "SELECT * FROM \"UserGraph\".\"testTable\" where \"userID\" = 2529767186;" );
+         ResultSet rs = stmt.executeQuery( "SELECT * FROM \"UserGraph\".\"userTable\" where \"userID\" = 2529767186;" );
          while ( rs.next() ) {
         	System.out.println(rs.getString("userName") );
         	System.out.println(rs.getLong("userID") );
-            java.sql.Array followersIDs  = rs.getArray(3);
+            java.sql.Array followersIDs  = rs.getArray(3);//Column number 3, type sql.Array
             System.out.println(followersIDs);
             Object[] str_followersIDs = (Object[]) followersIDs.getArray();
             //System.out.println(str_followersIDs);

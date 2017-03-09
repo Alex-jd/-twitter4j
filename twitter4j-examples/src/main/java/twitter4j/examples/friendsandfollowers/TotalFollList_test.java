@@ -17,7 +17,7 @@ public class TotalFollList_test {
 		System.out.println("followers " + list.getEdgesPostDBString("followers"));
 		System.out.println("friends " + list.getEdgesPostDBString("friends"));
 
-		Connection c = null;
+		/*Connection c = null;
 		Statement stmt = null;
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -40,7 +40,7 @@ public class TotalFollList_test {
 			e.printStackTrace();
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
-		}
+		}*/
 
 	}
 

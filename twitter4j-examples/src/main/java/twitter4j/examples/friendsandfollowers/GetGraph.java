@@ -2,7 +2,7 @@ package twitter4j.examples.friendsandfollowers;
 
 import java.util.LinkedList;
 
-public abstract class getGraph {
+public abstract class GetGraph {
 
 	public Long userID = 0L;
 	public LinkedList<Long> followers;
