@@ -13,7 +13,7 @@ public class TotalFollListAdapter {
 
 	    
 	    
-	    ListOfFriendOfMyFriends list = new ListOfFriendOfMyFriends();
+	    /*ListOfFriendOfMyFriends list = new ListOfFriendOfMyFriends();
 		LinkedList<Long> userList = list.getTotalFollowers(368379261L);
 		int numberOfUsers = 0;
 		
@@ -22,7 +22,7 @@ public class TotalFollListAdapter {
 			numberOfUsers++;
 		}
 		
-		System.out.println("TotalUsers " + numberOfUsers);
+		System.out.println("TotalUsers " + numberOfUsers);*/
 	    
 
 		
