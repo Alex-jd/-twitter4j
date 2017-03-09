@@ -21,7 +21,7 @@ public class PostgreSQLJDBC {
          Class.forName("org.postgresql.Driver");
          c = DriverManager
             .getConnection("jdbc:postgresql://10.98.137.19:5432/capstone",
-            "alex_jd", "Nheg{jvzrf");
+            "alex_jd", "123");
          
          c.setAutoCommit(false);
          System.out.println("Opened database successfully");
@@ -40,7 +40,7 @@ public class PostgreSQLJDBC {
          c.commit();*/
 
 
-         ResultSet rs = stmt.executeQuery( "SELECT * FROM \"UserGraph\".\"testTable\" where \"userID\" = 123;" );
+         ResultSet rs = stmt.executeQuery( "SELECT * FROM \"UserGraph\".\"testTable\" where \"userID\" = 2529767186;" );
          while ( rs.next() ) {
         	System.out.println(rs.getString("userName") );
         	System.out.println(rs.getLong("userID") );
