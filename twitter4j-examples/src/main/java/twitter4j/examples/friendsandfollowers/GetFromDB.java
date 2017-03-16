@@ -2,14 +2,16 @@ package twitter4j.examples.friendsandfollowers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class GetFromDB extends PostDB {
-	public String className = "GetFromDB";
 	private String tableName = "\"userTable\"";
+	private Statement stmt = null;
 
 	public GetFromDB() {
-		super.connectToDB();
+		this.stmt = getStatement();
 	}
 
 	public TreeSet<Long> getVisited() {
@@ -17,12 +19,12 @@ public class GetFromDB extends PostDB {
 		statement();
 		String sql = "SELECT " + tableName + ".\"userID\"  FROM \"UserGraph\"." + tableName + ";";
 		try {
-			ResultSet rs = super.stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Long userID = rs.getLong(1);
 				visited = new TreeSet<Long>();
 				visited.add(userID);
-				System.out.println(userID);
+				//System.out.println(userID);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -37,7 +39,7 @@ public class GetFromDB extends PostDB {
 		String sql = "SELECT " + tableName + ".\"userID\"  FROM \"UserGraph\"." + tableName + " where \"userID\" ="
 				+ userID + ";";
 		try {
-			isUser = super.stmt.executeQuery(sql).next();
+			isUser = stmt.executeQuery(sql).next();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,16 +47,16 @@ public class GetFromDB extends PostDB {
 		return isUser;
 	}
 
-	public TreeSet<Long> getFollowersByID(Long userID) {
-		TreeSet<Long> followers = null;
+	public ArrayList<Long> getFollowersByID(Long userID) {
+		ArrayList<Long> followers = null;
 		statement();
 		String sql = "SELECT * FROM \"UserGraph\"." + tableName + " where \"userID\" =" + userID + ";";
 		try {
-			ResultSet rs = super.stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				java.sql.Array followersIDs = rs.getArray(3);
 				Object[] arrayFollowersIDs = (Object[]) followersIDs.getArray();
-				followers = new TreeSet<Long>();
+				followers = new ArrayList<Long>();
 				for (int i = 0; i < arrayFollowersIDs.length; i++) {
 					followers.add((Long) arrayFollowersIDs[i]);
 				}
@@ -65,6 +67,20 @@ public class GetFromDB extends PostDB {
 			e.printStackTrace();
 		}
 		return followers;
+	}
+
+	public void setFollowersAndFriends(String userName, Long userID, String followers, String friends) {
+		statement();
+		String sql = "insert into \"UserGraph\"." + tableName + " values ('" + userName + "', " + userID + ",'{"
+				+ followers + "}','{" + friends + "}');";
+		try {
+			stmt.executeUpdate(sql);
+			super.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

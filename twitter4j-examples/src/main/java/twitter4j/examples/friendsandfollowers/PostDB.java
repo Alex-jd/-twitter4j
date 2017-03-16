@@ -5,18 +5,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class PostDB implements AutoCloseable {
-	public String className;
-	public Connection c = null;
-	public Statement stmt = null;
+public class PostDB implements AutoCloseable {
+	private Connection c = null;
+	private Statement stmt = null;
+
+	public PostDB() {
+		connectToDB();
+	}
+
+	public Statement getStatement() {
+		return stmt;
+	}
 
 	public void connectToDB() {
 		try {
 			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://10.98.137.19:5432/capstone", "alex_jd", "123");
+			c = DriverManager.getConnection("jdbc:postgresql://10.98.137.19:5432/capstone", "alex_jd", "Nheg{jvzrf");
 
 			c.setAutoCommit(false);
-			System.out.println("Opened database successfully " + className);
+			System.out.println("Opened database successfully ");
 
 			stmt = c.createStatement();
 			/*
@@ -103,12 +110,24 @@ public abstract class PostDB implements AutoCloseable {
 		try {
 			stmt.close();
 			c.close();
-			System.out.println("Closed database successfully " + className);
+			System.out.println("Closed database successfully ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+
+	public boolean getState() {
+		boolean state = false;
+		try {
+			if (stmt.isClosed())
+				state = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return state;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class ListFollowersAndFriends extends GetGraph {
 			Twitter tw = new TwitterFactory().getInstance();
 			User currentUser = tw.showUser(userID);// main string
 			userName = currentUser.getName();
-			int timeWait = 1;
+			int timeWait = 62;
 			// System.out.println("user " + u.getName());
 			long cursor = 0;
 			if (!currentUser.isProtected()) {
