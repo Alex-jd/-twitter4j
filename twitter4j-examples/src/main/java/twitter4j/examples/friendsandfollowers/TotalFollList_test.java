@@ -8,7 +8,7 @@ public class TotalFollList_test {
 		// Long userID = 809511570829152256L;
 		String userName = "test";
 
-		BFSTwitter testFirst = new BFSTwitter(userID, 10);
+		BFSTwitter testFirst = new BFSTwitter(userID, 5000);
 		testFirst.startBFS();
 
 		GetFromDB testGet = new GetFromDB();

@@ -56,30 +56,31 @@ public class BFSTwitter {
 				}
 			} else
 				while (count < arraySize) {
-				Long newNode = followers.get(count);
-				System.out.println("Get the newNode (arraySize < 11) " + newNode);
-					if (!(visited.contains(newNode) && exploreQueue.contains(newNode))) {
+					Long newNode = followers.get(count);
+					System.out.println("Get the newNode (arraySize < 11) " + newNode);
+					if (!visited.contains(newNode) && !exploreQueue.contains(newNode)) {
 						exploreQueue.add(newNode);
 						queueDB.addToQueueDB(newNode);
 					}
-				count++;
-			}
+					count++;
+				}
 
 		}
 
 	}
 
 	private Long getAndCheckRandomFollowers(ArrayList<Long> followers, int arraySize) {
-		Long followerID = followers.get(getRandomIndex(arraySize - 1));
-		if (visited.contains(followerID) || exploreQueue.contains(followerID)) {
-			followerID = followers.get(getRandomIndex(arraySize - 1));
+		Random r = new Random();
+		Long followerID = followers.get(r.nextInt(arraySize - 1));
+		while (visited.contains(followerID) || exploreQueue.contains(followerID)) {
+			followerID = followers.get(r.nextInt(arraySize - 1));
 		}
 		return followerID;
 	}
 
-	private int getRandomIndex(int streamSize) {
-		Random r = new Random();
-		return r.nextInt(streamSize);
-	}
+	/*
+	 * private int getRandomIndex(int streamSize) { Random r = new Random();
+	 * return r.nextInt(streamSize); }
+	 */
 
 }
