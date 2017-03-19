@@ -8,13 +8,17 @@ public class TotalFollList_test {
 		// Long userID = 809511570829152256L;
 		String userName = "test";
 
-		BFSTwitter testFirst = new BFSTwitter(userID, 5000);
+		BFSTwitter testFirst = new BFSTwitter(0L, 5000);
 		testFirst.startBFS();
 
 		GetFromDB testGet = new GetFromDB();
-		System.out.println("GetFollwersByID " + testGet.getFollowersByID(userID));
-		System.out.println("Get user ID " + testGet.isUserID(userID));
-		System.out.println("getVisited " + testGet.getVisited());
+		// System.out.println("GetFollwersByID " +
+		// testGet.getFollowersByID(userID));
+		// System.out.println("Get user ID " + testGet.isUserID(userID));
+		// System.out.println("getVisited " + testGet.getVisited());
+		for (Long i : testGet.getVisited()) {
+			System.out.println(i);
+		}
 		testGet.closeConnect();
 		// System.out.println(testGet.getState());
 

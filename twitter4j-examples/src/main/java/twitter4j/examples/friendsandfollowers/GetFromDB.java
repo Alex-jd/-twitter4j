@@ -22,6 +22,7 @@ public class GetFromDB extends PostDB {
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Long userID = rs.getLong(1);
+				System.out.println(userID);
 				visited = new TreeSet<Long>();
 				visited.add(userID);
 				//System.out.println(userID);

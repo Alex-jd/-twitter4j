@@ -38,7 +38,7 @@ public class ListFollowersAndFriends extends GetGraph {
 					}
 					cursor = idfoll.getNextCursor();
 					System.out.println("cursros " + cursor);
-				} while (idfoll.hasNext());
+				} while (idfoll.hasNext() && (followers.size() <= 15000));
 				cursor = -1;
 				do {
 					idfoll = tw.getFriendsIDs(userID, cursor);
@@ -49,7 +49,7 @@ public class ListFollowersAndFriends extends GetGraph {
 					}
 					cursor = idfoll.getNextCursor();
 					System.out.println("cursros " + cursor);
-				} while (idfoll.hasNext());
+				} while (idfoll.hasNext() && (friends.size() <= 15000));
 			} else
 				System.out.println(userID + " is protected");
 		} catch (TwitterException e) {

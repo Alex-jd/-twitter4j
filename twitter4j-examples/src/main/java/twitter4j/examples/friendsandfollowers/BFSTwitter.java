@@ -49,9 +49,11 @@ public class BFSTwitter {
 			if (arraySize >= 11) {
 				while (count < 10) {
 					Long newNode = getAndCheckRandomFollowers(followers, arraySize);
+					if (newNode != null) {
+						exploreQueue.add(newNode);
+						queueDB.addToQueueDB(newNode);
+					}
 					System.out.println("Get the newNode (arryaSize >= 11) " + newNode);
-					exploreQueue.add(newNode);
-					queueDB.addToQueueDB(newNode);
 					count++;
 				}
 			} else
@@ -72,8 +74,13 @@ public class BFSTwitter {
 	private Long getAndCheckRandomFollowers(ArrayList<Long> followers, int arraySize) {
 		Random r = new Random();
 		Long followerID = followers.get(r.nextInt(arraySize - 1));
-		while (visited.contains(followerID) || exploreQueue.contains(followerID)) {
+		int count = 0;
+		while ((visited.contains(followerID) || exploreQueue.contains(followerID)) && count <= 30) {
 			followerID = followers.get(r.nextInt(arraySize - 1));
+			count++;
+		}
+		if (count >= 30) {
+			return null;
 		}
 		return followerID;
 	}
